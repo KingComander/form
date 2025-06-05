@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $email = $password = $username = "";
 $errors = [];
 $store = "";
@@ -30,6 +33,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             alert('Data saved to localStorage.');
         </script>";
     }
+
+    $_SESSION['user']= $username;
 }
 elseif($_SERVER["REQUEST_METHOD"] == "GET"){
     // Sanitize inputs
@@ -62,6 +67,7 @@ elseif($_SERVER["REQUEST_METHOD"] == "GET"){
             alert('User added to localStorage.');
         </script>";
     }
+    $_SESSION['user']= $username;
 }
 ?>
 
@@ -83,10 +89,17 @@ elseif($_SERVER["REQUEST_METHOD"] == "GET"){
         echo "</ul>";
     } else {
         echo "<p style='color: green;'>Form submitted successfully.</p>";
+        header("location:use_session.php");
     }
 
     // Output JavaScript for localStorage if no errors
     echo $store;
+
+    
     ?>
 </body>
 </html>
+
+<?php
+
+?>
